@@ -14,16 +14,18 @@ export class QuoteGenerator {
     }
   }
 
-  async loadQuotes() {
-    const quotes = fsReadFile('src/i18n/pt-br.json', 'utf8');
+  private loadQuotesFile(lang: string) {
+    const quotes = fsReadFile(`src/i18n/pt-br.json`, 'utf8');
     return JSON.parse(quotes);
   }
 
-  getWisdomQuote(index?:number, language?:string) {
-    this.loadQuotes().then((f) => {
-      this.quote.setQuotes(f.quotes);
-    });
-    language = this.setLanguage(language ?? 'pt');
-    return this.quote.getQuote(index, language);
+  loadQuotes(lang: string){
+    const quotes = this.loadQuotesFile(this.setLanguage(lang));
+    this.quote.setQuotes(quotes.quotes);
+    return this;
+  }
+
+  getWisdomQuote(index?:number) {
+    return this.quote.getQuote(index);
   }
 }

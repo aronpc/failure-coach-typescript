@@ -27,4 +27,10 @@ describe('QuoteGenerator', () => {
     const quoteGenerator = new QuoteGenerator(quote);
     expect(quoteGenerator.getWisdomQuote()).toBe('Nunca foi azar, sempre foi incompetência.')
   });
+
+  it("should load file and get a quote", function() {
+    const quoteGenerator = new QuoteGenerator(new Quote());
+    expect(quoteGenerator.loadQuotes('pt').getWisdomQuote(0))
+      .toBe('Nunca foi azar, sempre foi incompetência.')
+  });
 });
