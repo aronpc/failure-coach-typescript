@@ -1,9 +1,13 @@
 import { QuoteInterface } from "../quote-interface/quote-interface.interface";
 import { fsReadFile } from "ts-loader/dist/utils";
+import { Inject } from "@nestjs/common";
+import { Quote } from "../quote/quote";
 
 export class QuoteGenerator {
 
-  constructor(private quote: QuoteInterface) {
+  constructor(
+    @Inject(Quote)
+    private quote: QuoteInterface) {
   }
 
   setLanguage(language?:string) {
@@ -15,7 +19,7 @@ export class QuoteGenerator {
   }
 
   private loadQuotesFile(lang: string) {
-    const quotes = fsReadFile(`src/i18n/pt-br.json`, 'utf8');
+    const quotes = fsReadFile(`src/i18n/${this.setLanguage(lang)}.json`, 'utf8');
     return JSON.parse(quotes);
   }
 
