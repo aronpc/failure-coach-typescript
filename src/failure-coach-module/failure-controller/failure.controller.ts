@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Redirect, Req } from "@nestjs/common";
+import { Controller, Get, Req } from "@nestjs/common";
 import { QuoteGenerator } from "../quote-generator/quote-generator";
 import { Request } from "express";
 
